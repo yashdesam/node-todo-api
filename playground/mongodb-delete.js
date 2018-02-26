@@ -1,3 +1,4 @@
+//sudo mongod -dbpath ~/Documents/ma_stuff/software_course/mongoDB/mongo-data
 //const mongoClient = require('mongodb').MongoClient;
 const { MongoClient, ObjectID } = require('mongodb');
 
