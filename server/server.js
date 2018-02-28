@@ -11,6 +11,8 @@ var { User } = require('./models/user');
 var app = express();
 var port = process.env.PORT || 3000;
 
+console.log(`Listening on port ${port}`);
+
 app.use(bodyParser.json());
 
 app.post('/todos', (req, res) => {
