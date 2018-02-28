@@ -1,3 +1,5 @@
+require('./config/config.js');
+
 const _ = require('lodash');
 const { ObjectID } = require('mongodb');
 
@@ -9,9 +11,7 @@ var { Todo } = require('./models/todo');
 var { User } = require('./models/user');
 
 var app = express();
-var port = process.env.PORT || 3000;
-
-console.log(`Listening on port ${port}`);
+var port = process.env.PORT;
 
 app.use(bodyParser.json());
 
