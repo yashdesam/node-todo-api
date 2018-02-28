@@ -130,11 +130,11 @@ describe('DELETE /todos/:id', () => {
   //     .end(done);
   // });
 
-  it('Should return 404 if object id is invalid', (done) => {
-    request(app)
-      .delete('/todos/123sd')
-      .expect(404)
-      .end(done);
-  });
+  // it('Should return 404 if object id is invalid', (done) => {
+  //   request(app)
+  //     .delete('/todos/123sd')
+  //     .expect(404)
+  //     .end(done);
+  // });
 
 });
