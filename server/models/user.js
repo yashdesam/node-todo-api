@@ -33,19 +33,19 @@ var UserSchema = new mongoose.Schema({
   }, ]
 });
 
-UserSchema.methods.toJSON = function() {
+UserSchema.methods.toJSON = function () {
   var user = this;
   var userObject = user.toObject();
   return _.pick(userObject, ['_id', 'email']);
 };
 
-UserSchema.methods.generateAuthToken = function() {
+UserSchema.methods.generateAuthToken = function () {
   var user = this;
   var access = 'auth';
   var token = jwt.sign({
     _id: user._id.toHexString(),
     access,
-  }, 'abc123').toString();
+  }, process.env.JWT_SECRET).toString();
 
   user.tokens = user.tokens.concat([{
     access,
@@ -70,7 +70,7 @@ UserSchema.statics.findByToken = function (token) {
   var decoded;
 
   try {
-    decoded = jwt.verify(token, 'abc123');
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
   } catch (e) {
     return Promise.reject();
   }
@@ -121,5 +121,5 @@ UserSchema.pre('save', function (next) {
 var User = mongoose.model('User', UserSchema);
 
 module.exports = {
-  User
+  User,
 };
