@@ -6,7 +6,7 @@ const { ObjectID } = require('mongodb');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-var { mongoose } = require('./db/mongoose.js');
+var { mongoose } = require('./db/mongoose');
 var { Todo } = require('./models/todo');
 var { User } = require('./models/user');
 var { authenticate } = require('./middleware/authenticate');
@@ -126,6 +126,13 @@ app.post('/users/login', (req, res) => {
   });
 });
 
+app.delete('/users/me/token', authenticate, (req, res) => {
+  req.user.removeToken(req.token).then(() => {
+    res.status(200).send();
+  }, () => {
+    res.status(400).send();
+  });
+});
 app.listen(port, () => {
   console.log(`Started up at port ${port}`);
 });
